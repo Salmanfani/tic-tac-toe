@@ -1,0 +1,73 @@
+Title: Tic-Tac-Toe
+
+Description:
+A simple two-player paper-and-pencil game played on a 3x3 grid. Players take turns placing their symbol (X or O) in an empty cell. The first player to place three of their symbols in a horizontal, vertical, or diagonal row wins. If all nine cells are filled without a winning line, the game is a draw.
+
+How to play:
+1. Decide which player is X and which is O. X usually goes first.
+2. Players alternate turns and place their symbol in any empty cell.
+3. Check for a win after each move: three in a row horizontally, vertically, or diagonally.
+4. If a player wins, the game ends. If the board is full with no winner, it's a draw.
+
+Board notation:
+Positions are numbered 1-9 like this:
+
+ 1 | 2 | 3
+---+---+---
+ 4 | 5 | 6
+---+---+---
+ 7 | 8 | 9
+
+Example play (moves):
+X -> 5
+O -> 1
+X -> 9
+O -> 2
+X -> 3
+Board now:
+ O | O | X
+---+---+---
+   | X |   
+---+---+---
+   |   | X
+X wins (diagonal 3-5-9).
+
+Basic strategy tips:
+- If you can win on your move, do it.
+- If the opponent can win on their next move, block them.
+- Take the center (5) if available — it's the strongest opening move.
+- Take a corner if the center is taken.
+- Avoid giving the opponent a fork (two non-blocked winning opportunities).
+
+Simple AI approaches:
+1. Rule-based: implement the strategy tips above in order.
+2. Minimax algorithm: search the game tree exhaustively (small game) to pick optimal moves.
+
+Pseudocode (minimax, player = maximizing X, opponent = minimizing O):
+
+function minimax(board, depth, isMaximizing):
+    if game over or depth == 0:
+        return evaluation score (+1 for X win, -1 for O win, 0 draw)
+    if isMaximizing:
+        bestScore = -infinity
+        for each empty cell:
+            place X in cell
+            score = minimax(board, depth-1, false)
+            undo move
+            bestScore = max(bestScore, score)
+        return bestScore
+    else:
+        bestScore = +infinity
+        for each empty cell:
+            place O in cell
+            score = minimax(board, depth-1, true)
+            undo move
+            bestScore = min(bestScore, score)
+        return bestScore
+
+Notes:
+- Tic-tac-toe is a solved game; with perfect play from both sides, the result is a draw.
+- This file is a plain text primer: rules, notation, sample game, strategy tips, and a brief AI note.
+
+Author: Salmanfani
+Date: 2025-11-19 13:49:09
